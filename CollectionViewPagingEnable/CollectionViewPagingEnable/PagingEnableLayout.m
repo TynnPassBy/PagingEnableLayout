@@ -9,21 +9,40 @@
 #import "PagingEnableLayout.h"
 #import <objc/message.h>
 
-#define ScreenWidth [UIScreen mainScreen].bounds.size.width
-
 @implementation PagingEnableLayout
 
 - (void)prepareLayout{
     [super prepareLayout];
-    //屏幕宽去掉中间的cell宽度的大小
-    CGFloat contentInset = ScreenWidth-round(200.0*ScreenWidth/375);
-    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
-    self.collectionView.contentInset = UIEdgeInsetsMake(0, contentInset*0.5, 0, contentInset*0.5);
-    if ([self.collectionView respondsToSelector:NSSelectorFromString(@"_setInterpageSpacing:")]) {
-        ((void(*)(id,SEL,CGSize))objc_msgSend)(self.collectionView,NSSelectorFromString(@"_setInterpageSpacing:"),CGSizeMake(-(contentInset-self.minimumInteritemSpacing), 0));
+    
+    CGFloat pageInset;
+    CGSize  interpageSize;
+    CGPoint pagingOrigin;
+    
+    if (self.scrollDirection == UICollectionViewScrollDirectionVertical) {
+        pageInset = self.collectionView.bounds.size.height - round(self.itemSize.height);
+        
+        self.collectionView.contentInset = UIEdgeInsetsMake(self.headMargin, 0, pageInset * 0.5 + self.headMargin, 0);
+        
+        interpageSize = CGSizeMake(0, -(pageInset-self.minimumLineSpacing));
+        
+        pagingOrigin = CGPointMake(0, -self.headMargin);
+        
+    }else{
+        pageInset = self.collectionView.bounds.size.width - round(self.itemSize.width);
+        
+        self.collectionView.contentInset = UIEdgeInsetsMake(0, self.headMargin, 0, pageInset * 0.5 + self.headMargin);
+        
+        interpageSize = CGSizeMake(-(pageInset-self.minimumLineSpacing), 0);
+        
+        pagingOrigin = CGPointMake(-self.headMargin, 0);
     }
-    if ([self.collectionView respondsToSelector:NSSelectorFromString(@"_setPagingOrigin:")]) {
-        ((void(*)(id,SEL,CGPoint))objc_msgSend)(self.collectionView,NSSelectorFromString(@"_setPagingOrigin:"),CGPointMake(-contentInset*0.5, 0));
+    
+    if ([self.collectionView respondsToSelector:NSSelectorFromString(@"_setInterpageSpacing:")]) {
+        ((void(*)(id,SEL,CGSize))objc_msgSend)(self.collectionView,NSSelectorFromString(@"_setInterpageSpacing:"),interpageSize);
+    }
+    
+    if ([self.collectionView      respondsToSelector:NSSelectorFromString(@"_setPagingOrigin:")]) {
+        ((void(*)(id,SEL,CGPoint))objc_msgSend)(self.collectionView,NSSelectorFromString(@"_setPagingOrigin:"),pagingOrigin);
     }
 }
 

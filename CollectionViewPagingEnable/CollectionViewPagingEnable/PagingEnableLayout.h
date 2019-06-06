@@ -10,4 +10,7 @@
 
 @interface PagingEnableLayout : UICollectionViewFlowLayout
 
+/** collectionView头部间距 , 默认为0 */
+@property (nonatomic, assign) CGFloat headMargin;
+
 @end
