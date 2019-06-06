@@ -53,7 +53,7 @@
         layout.itemSize = CGSizeMake(itemWidth, itemHeight);
         
         //3.初始化CollectionView,要使用frame布局
-        _listCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, NavigetionBarHeight + 100, ScreenW, 600) collectionViewLayout:layout];
+        _listCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, NavigetionBarHeight + 100, ScreenW, 230) collectionViewLayout:layout];
         _listCollectionView.backgroundColor = [UIColor whiteColor];
         _listCollectionView.dataSource = self;
         _listCollectionView.delegate = self;
