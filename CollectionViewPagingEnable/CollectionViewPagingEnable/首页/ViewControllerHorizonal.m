@@ -39,12 +39,12 @@
         
         //1.自定义item的宽高
         CGFloat itemHeight = 230.f;
-        CGFloat itemWidth = 200;
+        CGFloat itemWidth = 260;
         
         //2.创建布局
         PagingEnableLayout *layout = [[PagingEnableLayout alloc] init];
         //设置第一个item距离collecitonView头部的距离
-        layout.headMargin = 50;
+        layout.headMargin = 30;
         //设置滚动方向为 - 水平方向
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         //设置间距

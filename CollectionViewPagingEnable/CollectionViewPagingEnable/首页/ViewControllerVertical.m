@@ -45,7 +45,7 @@
         //设置第一个item距离collecitonView头部的距离
         layout.headMargin = 50;
         //设置间距
-        layout.minimumLineSpacing = 60;
+        layout.minimumLineSpacing = 50;
         //设置滚动方向为 - 垂直方向
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
         //设置item大小

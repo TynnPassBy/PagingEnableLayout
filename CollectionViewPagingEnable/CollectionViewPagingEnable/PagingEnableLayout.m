@@ -21,7 +21,7 @@
     if (self.scrollDirection == UICollectionViewScrollDirectionVertical) {
         pageInset = self.collectionView.bounds.size.height - round(self.itemSize.height);
         
-        self.collectionView.contentInset = UIEdgeInsetsMake(self.headMargin, 0, pageInset * 0.5, 0);
+        self.collectionView.contentInset = UIEdgeInsetsMake(self.headMargin, 0, pageInset * 0.5 + self.headMargin, 0);
         
         interpageSize = CGSizeMake(0, -(pageInset-self.minimumLineSpacing));
         
@@ -30,7 +30,7 @@
     }else{
         pageInset = self.collectionView.bounds.size.width - round(self.itemSize.width);
         
-        self.collectionView.contentInset = UIEdgeInsetsMake(0, self.headMargin, 0, pageInset * 0.5);
+        self.collectionView.contentInset = UIEdgeInsetsMake(0, self.headMargin, 0, (pageInset + self.headMargin) * 0.5);
         
         interpageSize = CGSizeMake(-(pageInset-self.minimumLineSpacing), 0);
         
